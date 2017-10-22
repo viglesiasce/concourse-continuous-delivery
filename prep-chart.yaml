@@ -6,6 +6,9 @@ image_resource:
   source:
     repository: linkyard/concourse-helm-resource
 
+inputs:
+- name: source
+
 outputs:
 - name: helm-repo
 
