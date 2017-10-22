@@ -19,5 +19,5 @@ run:
   - |
     mkdir -p helm-repo
     helm init --client-only
-    helm package source/nginx helm-repo
+    helm package source/nginx -d helm-repo
     helm repo index --merge helm-repo
