@@ -25,11 +25,11 @@ resources:
 jobs:
   - name: controller-mysql
     plan:
-      do:
-      - get: source
-        trigger: true
-      - task: build-chart
-        file: prep-chart.yaml
-      - put: dev-site
-        params:
-          chart: source/repo/nginx-0.1.0.tgz
+      - do:
+        - get: source
+          trigger: true
+        - task: build-chart
+          file: prep-chart.yaml
+        - put: dev-site
+          params:
+            chart: source/repo/nginx-0.1.0.tgz
