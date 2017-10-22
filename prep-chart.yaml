@@ -4,8 +4,7 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: devth/helm
-    tag: 2.6.2
+    repository: linkyard/concourse-helm-resource
 
 outputs:
 - name: helm-repo
