@@ -32,4 +32,4 @@ jobs:
           file: source/prep-chart.yaml
         - put: dev-site
           params:
-            chart: source/repo/nginx-0.1.0.tgz
+            chart: helm-repo/nginx-0.1.0.tgz
