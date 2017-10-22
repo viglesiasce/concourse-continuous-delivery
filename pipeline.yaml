@@ -12,7 +12,9 @@ resources:
   type: helm
   source:
     release: dev-site
-    token_path: /var/run/secrets/kubernetes.io/serviceaccount/token
+    cluster_url: https://kubernetes
+    cluster_ca: {{cluster_ca}}
+    token: {{token}}
 
 - name: source
   type: git
@@ -23,7 +25,11 @@ resources:
 jobs:
   - name: controller-mysql
     plan:
+      do:
       - get: source
+        trigger: true
+      - task: build-chart
+        file: prep-chart.yaml
       - put: dev-site
         params:
-          chart: repo/nginx-0.0.1.tgz
+          chart: source/repo/nginx-0.1.0.tgz
