@@ -1,0 +1,29 @@
+---
+platform: linux
+
+resource_types:
+- name: helm
+  type: docker-image
+  source:
+    repository: linkyard/concourse-helm-resource
+
+resources:
+- name: dev-site
+  type: helm
+  source:
+    release: dev-site
+    token_path: /var/run/secrets/kubernetes.io/serviceaccount/token
+
+- name: source
+  type: git
+  source:
+    uri: https://github.com/viglesiasce/concourse-continuous-delivery.git
+    branch: master
+
+jobs:
+  - name: controller-mysql
+    plan:
+      - get: source
+      - put: dev-site
+        params:
+          chart: repo/nginx-0.0.1.tgz
