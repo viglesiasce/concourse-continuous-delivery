@@ -6,6 +6,9 @@ metadata:
   namespace: default
 data:
   index.html: |
-    <h1>Release name: {{ .Release.Name }}</h1>
     <h1>Chart name: {{ .Chart.Name }}</h1>
+    <h1>Chart version: {{ .Chart.Version }}</h1>
+    <h1>Release name: {{ .Release.Name }}</h1>
     <h1>Release revision: {{ .Release.Revision }}</h1>
+    
+    
