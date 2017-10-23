@@ -29,6 +29,13 @@ spec:
             httpGet:
               path: /
               port: {{ .Values.service.internalPort }}
+          volumeMounts:
+          - name: static-content
+            mountPath: /usr/share/nginx/html
+      volumes:
+        - name: static-content
+          configMap:
+            name: static-content
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
