@@ -6,4 +6,4 @@ metadata:
   namespace: default
 data:
   index.html: |
-    <h1>VERSION {{.Release.Number}}</h1>
+    <h1>Release version: {{.Release.Version}}</h1>
