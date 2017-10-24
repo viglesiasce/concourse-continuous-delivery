@@ -1,4 +1,4 @@
----
+ ---
 platform: linux
 
 resource_types:
@@ -29,7 +29,7 @@ jobs:
         - get: source
           trigger: true
         - task: build-chart
-          file: source/prep-chart.yaml
+          file: source/tasks/prep-chart.yaml
         - put: dev-site
           params:
             chart: helm-repo/nginx-0.1.0.tgz
