@@ -23,7 +23,7 @@ resources:
     branch: master
 
 jobs:
-  - name: controller-mysql
+  - name: deploy-chart
     plan:
       - do:
         - get: source
