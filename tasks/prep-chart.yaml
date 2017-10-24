@@ -19,4 +19,4 @@ run:
   - |
     mkdir -p helm-repo
     helm init --client-only
-    helm package source/nginx -d helm-repo
+    helm package source/nginx -d helm-repo --version $(cat source/VERSION)
