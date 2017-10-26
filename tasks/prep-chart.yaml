@@ -28,7 +28,7 @@ run:
     fi
     mkdir -p helm-repo
     helm init --client-only
-    VERSION=$(cd source && git tag -l --points-at HEAD)
+    VERSION=$(cd source && git tag -l --points-at HEAD | tail -n1)
     helm package source/$chart_name -d helm-repo --version $VERSION
     helm gcs push helm-repo/$chart_name-$VERSION.tgz $bucket
     
