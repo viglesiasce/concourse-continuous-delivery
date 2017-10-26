@@ -46,7 +46,7 @@ jobs:
     plan:
     - get: app-source
       trigger: true
-    - task: build-chart
+    - task: get-version
       file: source/tasks/get-version.yaml
     - put: app-image
       params:
@@ -56,13 +56,17 @@ jobs:
 
   - name: deploy-chart
     plan:
-      - get: chart-source
-        trigger: true
-      - task: build-chart
-        file: source/tasks/prep-chart.yaml
-        params:
-          bucket: {{bucket}}
-          chart_name: {{chart_name}}
-      - put: {{release_name}}
-        params:
-          chart: gcs-repo/{{chart_name}}
+    - get: app-image
+      trigger: true
+      passed:
+      - build-image
+    - get: chart-source
+      trigger: true
+    - task: build-chart
+      file: source/tasks/prep-chart.yaml
+      params:
+        bucket: {{bucket}}
+        chart_name: {{chart_name}}
+    - put: {{release_name}}
+      params:
+        chart: gcs-repo/{{chart_name}}
