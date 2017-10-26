@@ -63,7 +63,7 @@ jobs:
     - get: chart-source
       trigger: true
     - task: build-chart
-      file: source/tasks/prep-chart.yaml
+      file: chart-source/tasks/prep-chart.yaml
       params:
         bucket: {{bucket}}
         chart_name: {{chart_name}}
