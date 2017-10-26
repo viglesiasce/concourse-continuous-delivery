@@ -9,10 +9,10 @@ resource_types:
     tag: v0.2.0
 
 resources:
-- name: dev-site
+- name: {{release_name}}
   type: helm
   source:
-    release: dev-site
+    release: {{release_name}}
     cluster_url: https://kubernetes
     cluster_ca: {{cluster_ca}}
     token: {{token}}
@@ -38,6 +38,6 @@ jobs:
           params:
             bucket: {{bucket}}
             chart_name: {{chart_name}}
-        - put: dev-site
+        - put: {{release_name}}
           params:
             chart: gcs-repo/{{chart_name}}
