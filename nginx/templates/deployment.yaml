@@ -35,4 +35,4 @@ spec:
       volumes:
         - name: static-content
           configMap:
-            name: static-content
+            name: {{ template "fullname" . }}-static
