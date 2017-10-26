@@ -29,4 +29,5 @@ cluster_ca: $CLUSTER_CA
 token: $TOKEN
 EOF
 
-fly -t local set-pipeline -p chart-deploy -c pipeline.yaml -l secrets.yaml
+fly -t local set-pipeline -p dev-site-deploy -c pipeline.yaml -l secrets.yaml
+fly -t local unpause-pipeline -p dev-site-deploy

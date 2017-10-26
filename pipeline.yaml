@@ -20,7 +20,21 @@ resources:
     - name: gcs-repo
       url: {{bucket}}
 
-- name: source
+- name: app-image
+  type: docker-image
+  source:
+    repository: gcr.io/{{project}}/app-image
+    username: _json_key
+    password: {{service_account_json}}
+
+- name: chart-source
+  type: git
+  source:
+    uri: https://github.com/viglesiasce/concourse-continuous-delivery.git
+    branch: master
+    tag_filter: v*
+
+- name: app-source
   type: git
   source:
     uri: https://github.com/viglesiasce/concourse-continuous-delivery.git
@@ -28,16 +42,27 @@ resources:
     tag_filter: v*
 
 jobs:
+  - name: build-image
+    plan:
+    - get: app-source
+      trigger: true
+    - task: build-chart
+      file: source/tasks/get-version.yaml
+    - put: app-image
+      params:
+        build: app-source
+        tag: app-source/version
+        tag_as_latest: true
+
   - name: deploy-chart
     plan:
-      - do:
-        - get: source
-          trigger: true
-        - task: build-chart
-          file: source/tasks/prep-chart.yaml
-          params:
-            bucket: {{bucket}}
-            chart_name: {{chart_name}}
-        - put: {{release_name}}
-          params:
-            chart: gcs-repo/{{chart_name}}
+      - get: chart-source
+        trigger: true
+      - task: build-chart
+        file: source/tasks/prep-chart.yaml
+        params:
+          bucket: {{bucket}}
+          chart_name: {{chart_name}}
+      - put: {{release_name}}
+        params:
+          chart: gcs-repo/{{chart_name}}
