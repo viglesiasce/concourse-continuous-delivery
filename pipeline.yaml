@@ -18,7 +18,7 @@ resources:
     token: {{token}}
     repos:
     - name: gcs-repo
-      url: gs://vic-goog-helm-repo
+      url: gs://{{bucket_name}}
 
 - name: source
   type: git
@@ -35,6 +35,9 @@ jobs:
           trigger: true
         - task: build-chart
           file: source/tasks/prep-chart.yaml
+          params:
+            bucket_name: {{bucket_name}}
+            chart_name: {{chart_name}}
         - put: dev-site
           params:
-            chart: gcs-repo/nginx
+            chart: gcs-repo/{{chart_name}}
