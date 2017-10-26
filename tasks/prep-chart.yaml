@@ -30,5 +30,5 @@ run:
     helm init --client-only
     VERSION=$(cd source && git tag -l --points-at HEAD)
     helm package source/$chart_name -d helm-repo --version $VERSION
-    helm gcs push helm-repo/$chart_name-$VERSION.tgz gs://$bucket_name
+    helm gcs push helm-repo/$chart_name-$VERSION.tgz $bucket_name
     

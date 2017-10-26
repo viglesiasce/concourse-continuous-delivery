@@ -18,7 +18,7 @@ resources:
     token: {{token}}
     repos:
     - name: gcs-repo
-      url: gs://{{bucket_name}}
+      url: {{bucket_name}}
 
 - name: source
   type: git
