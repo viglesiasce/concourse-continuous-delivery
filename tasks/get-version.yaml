@@ -10,9 +10,6 @@ image_resource:
 inputs:
 - name: app-source
 
-outputs:
-- name: app-source
-
 run:
   path: bash
   args:

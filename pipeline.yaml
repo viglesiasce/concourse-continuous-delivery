@@ -23,7 +23,7 @@ resources:
 - name: app-image
   type: docker-image
   source:
-    repository: gcr.io/{{project}}/app-image
+    repository: gcr.io/((project))/app-image
     username: _json_key
     password: {{service_account_json}}
 
@@ -37,7 +37,7 @@ resources:
 - name: app-source
   type: git
   source:
-    uri: https://github.com/viglesiasce/concourse-continuous-delivery.git
+    uri: https://github.com/viglesiasce/nginx-sample.git
     branch: master
     tag_filter: v*
 
@@ -47,11 +47,11 @@ jobs:
     - get: app-source
       trigger: true
     - task: get-version
-      file: source/tasks/get-version.yaml
+      file: app-source/tasks/get-version.yaml
     - put: app-image
       params:
         build: app-source
-        tag: app-source/version
+        tag: app-version/version
         tag_as_latest: true
 
   - name: deploy-chart
@@ -70,3 +70,8 @@ jobs:
     - put: {{release_name}}
       params:
         chart: gcs-repo/{{chart_name}}
+        override_values:
+        - key: image.repository
+          path: app-image/repository
+        - key: image.tag
+          path: app-image/tag
