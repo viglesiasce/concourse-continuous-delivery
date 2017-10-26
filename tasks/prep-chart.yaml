@@ -20,7 +20,7 @@ run:
   - |
     mkdir -p helm-repo
     helm init --client-only
-    VERSION=$(cat source/VERSION)
+    VERSION=$(cd source && git tag -l --points-at HEAD)
     helm package source/nginx -d helm-repo --version $VERSION
     helm gcs push helm-repo/nginx-$VERSION.tgz gs://vic-goog-helm-repo
     
