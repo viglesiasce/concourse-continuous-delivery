@@ -15,14 +15,14 @@ outputs:
 
 params:
   chart_name: nginx
-  bucket_name: ""
+  bucket: ""
 
 run:
   path: bash
   args:
   - -exc
   - |
-    if [[ -z "$bucket_name" ]];then
+    if [[ -z "$bucket" ]];then
       echo "Bucket name not set"
       exit 1
     fi
@@ -30,5 +30,5 @@ run:
     helm init --client-only
     VERSION=$(cd source && git tag -l --points-at HEAD)
     helm package source/$chart_name -d helm-repo --version $VERSION
-    helm gcs push helm-repo/$chart_name-$VERSION.tgz $bucket_name
+    helm gcs push helm-repo/$chart_name-$VERSION.tgz $bucket
     

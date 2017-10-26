@@ -18,7 +18,7 @@ resources:
     token: {{token}}
     repos:
     - name: gcs-repo
-      url: {{bucket_name}}
+      url: {{bucket}}
 
 - name: source
   type: git
@@ -36,7 +36,7 @@ jobs:
         - task: build-chart
           file: source/tasks/prep-chart.yaml
           params:
-            bucket_name: {{bucket_name}}
+            bucket: {{bucket}}
             chart_name: {{chart_name}}
         - put: dev-site
           params:
