@@ -8,6 +8,15 @@ resource_types:
     repository: gcr.io/cloud-solutions-images/concourse-helm-gcp
     tag: v0.2.0
 
+- name: git-gcp
+  type: docker-image
+  source:
+    repository: gcr.io/cloud-solutions-images/concourse-git-gcp
+    tag: v0.2.0
+    git_config:
+      credential.helper: gcloud.sh
+
+
 resources:
 - name: {{release_name}}
   type: helm
@@ -18,7 +27,7 @@ resources:
     token: {{token}}
     repos:
     - name: gcs-repo
-      url: {{bucket}}
+      url: gs://((bucket))
 
 - name: app-image
   type: docker-image
@@ -28,14 +37,14 @@ resources:
     password: {{service_account_json}}
 
 - name: chart-source
-  type: git
+  type: git-gcp
   source:
     uri: https://github.com/viglesiasce/concourse-continuous-delivery.git
     branch: master
     tag_filter: v*
 
 - name: app-source
-  type: git
+  type: git-gcp
   source:
     uri: https://github.com/viglesiasce/nginx-sample.git
     branch: master
