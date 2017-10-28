@@ -12,10 +12,7 @@ resource_types:
   type: docker-image
   source:
     repository: gcr.io/cloud-solutions-images/concourse-git-gcp
-    tag: v0.2.0
-    git_config:
-      credential.helper: gcloud.sh
-
+    tag: v0.4.0
 
 resources:
 - name: {{release_name}}
@@ -39,16 +36,22 @@ resources:
 - name: chart-source
   type: git-gcp
   source:
-    uri: https://github.com/viglesiasce/concourse-continuous-delivery.git
+    uri: https://source.developers.google.com/p/((project))/r/nginx-chart
     branch: master
     tag_filter: v*
+    git_config:
+      - name: credential.helper
+        value: gcloud.sh
 
 - name: app-source
   type: git-gcp
   source:
-    uri: https://github.com/viglesiasce/nginx-sample.git
+    uri: https://source.developers.google.com/p/((project))/r/nginx-image
     branch: master
     tag_filter: v*
+    git_config:
+      - name: credential.helper
+        value: gcloud.sh
 
 jobs:
   - name: build-image
