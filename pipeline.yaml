@@ -36,7 +36,7 @@ resources:
 - name: chart-source
   type: git-gcp
   source:
-    uri: https://source.developers.google.com/p/((project))/r/nginx-chart
+    uri: https://source.developers.google.com/p/((project))/r/chart-source
     branch: master
     tag_filter: v*
     git_config:
@@ -46,7 +46,7 @@ resources:
 - name: app-source
   type: git-gcp
   source:
-    uri: https://source.developers.google.com/p/((project))/r/nginx-image
+    uri: https://source.developers.google.com/p/((project))/r/app-source
     branch: master
     tag_filter: v*
     git_config:
