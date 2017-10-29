@@ -1,0 +1,23 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source:
+    repository: gcr.io/cloud-solutions-images/concourse-helm-gcp
+    tag: v0.2.0
+
+inputs:
+- name: app-source
+
+outputs:
+- name: app-version
+
+run:
+  path: bash
+  args:
+  - -exc
+  - |
+    mkdir -p app-version
+    cd app-source && git tag -l --points-at HEAD | tail -n1 > ../app-version/version
+    
