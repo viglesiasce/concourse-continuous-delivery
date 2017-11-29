@@ -5,9 +5,10 @@ metadata:
   name: {{ template "fullname" . }}-static
 data:
   index.html: |
-    <h1>Chart name: {{ .Chart.Name }}</h1>
-    <h1>Chart version: {{ .Chart.Version }}</h1>
-    <h1>Release name: {{ .Release.Name }}</h1>
-    <h1>Release revision: {{ .Release.Revision }}</h1>
+    <h1 style="color:blue;">Welcome to the sample app!</h1>
+    <h2>Chart name: {{ .Chart.Name }}</h2>
+    <h2>Chart version: {{ .Chart.Version }}</h2>
+    <h2>Release name: {{ .Release.Name }}</h2>
+    <h2>Release revision: {{ .Release.Revision }}</h2>
     
     
