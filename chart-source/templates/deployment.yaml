@@ -8,9 +8,14 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/config-map.yaml") . | sha256sum }}
       labels:
         app: {{ template "name" . }}
         release: {{ .Release.Name }}
