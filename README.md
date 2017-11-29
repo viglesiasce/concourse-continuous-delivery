@@ -1,5 +1,7 @@
 # concourse-continuous-delivery
 
+![Architecture Diagram](docs/arch.png)
+
 ### Create cluster
 
 gcloud container clusters create concourse --image-type ubuntu --machine-type n1-standard-2 --zone us-central1-f
