@@ -6,7 +6,7 @@ ENV GCLOUD_SDK_URL=https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/go
 
 # Add helm-gcs pluginf
 RUN helm init --client-only && \
-    helm plugin install https://github.com/viglesiasce/helm-gcs.git
+    helm plugin install https://github.com/viglesiasce/helm-gcs.git --version v0.1.1
 
 # Install gcloud
 RUN apk update && apk add curl openssl python \
