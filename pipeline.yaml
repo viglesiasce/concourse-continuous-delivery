@@ -85,5 +85,5 @@ jobs:
         override_values:
         - key: image.repository
           path: app-image/repository
-        - key: image.tag
-          path: app-image/tag
+        - key: image.digest
+          path: app-image/digest
